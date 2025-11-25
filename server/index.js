@@ -2,15 +2,14 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 require('dotenv').config()
-
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-
+ 
 // Enable CORS for your frontend domain
 app.use(cors({
-  origin: 'https://lets-solve-quizzz.netlify.app', // your frontend URL
+  origin: process.env.FRONTEND_URL,
   credentials: true
 }));
 
