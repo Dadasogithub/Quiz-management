@@ -1,0 +1,6 @@
+/* QuizList styles */
+.card-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px }
+.card { width: 400px; background: #fff; border: 1px solid #eaecef; padding: 12px; border-radius: 8px }
+.btn { padding: 8px 12px; border-radius: 6px; border:none }
+.btn-primary { background:#2563eb; color:#fff }
+.muted { color:#6b7280 }

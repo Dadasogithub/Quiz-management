@@ -1,0 +1,14 @@
+/* QuizPlayer styles */
+.quiz-player { max-width: 100%; margin: 0 auto }
+.card { background: #fff; border: 1px solid #eaecef; padding: 16px; border-radius: 8px; }
+.progress-wrap { height: 12px; background:#e9eef9; border-radius: 999px; overflow: hidden; margin-bottom: 10px }
+.progress { height: 100%; background: linear-gradient(90deg,#3b82f6,#06b6d4); width: 0 }
+.option { padding: 10px 12px; border: 1px solid #eaecef; border-radius: 6px; margin-bottom: 8px; cursor: pointer; text-align: left }
+.option.selected { border-color: #2563eb; background:#eef2ff }
+.option.correct { border-color: #16a34a; background: #ecfdf5 }
+.option.incorrect { border-color: #dc2626; background: #fff1f2 }
+.result-banner { padding: 16px; border-radius: 8px; color: #fff; font-weight:700; margin-bottom:8px }
+.result-excellent { background: linear-gradient(90deg,#06b6d4,#3b82f6) }
+.result-best { background: linear-gradient(90deg,#10b981,#06b6d4) }
+.result-good { background: linear-gradient(90deg,#f59e0b,#fb923c) }
+.result-need { background: linear-gradient(90deg,#ef4444,#fb7185) }
