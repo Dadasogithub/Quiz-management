@@ -9,21 +9,45 @@ export default function QuizPlayer({ quizId }){
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [answers, setAnswers] = useState([]) // selected answers per question
+  const [timer, setTimer] = useState(10)
+
+  
 
   useEffect(()=>{
     setLoading(true)
     fetchQuiz(quizId).then(data=>{setQuiz(data); setLoading(false)}).catch(err=>{setError(err.message); setLoading(false)})
   },[quizId])
 
+
+  
+  useEffect(() => {
+    setTimer(10) // reset timer every question
+
+    const interval = setInterval(() => {
+      setTimer(t => {
+        if (t <= 1) {
+          clearInterval(interval)
+          next()        // AUTO NEXT
+          return 0
+        }
+        return t - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [index])
+
+
   if (loading) return <p>Loading quiz...</p>
   if (error) return <p style={{color:'red'}}>Error: {error}</p>
   if (!quiz) return <p>Quiz not found</p>
+
 
   const question = quiz.questions[index]
 
   function next(){
     const selected = answers[index]
-    if (typeof selected !== 'number') return
+    // if (typeof selected !== 'number') return
     setIndex(i=>i+1)
   }
 
@@ -65,16 +89,26 @@ export default function QuizPlayer({ quizId }){
   const percent = Math.round((index/quiz.questions.length)*100)
   return (
     <div className="quiz-player" style={{padding:20}}>
+
+ 
       <h2>{quiz.title}</h2>
       <div className="card">
         <div className="progress-wrap">
           <div className="progress" style={{width: `${percent}%`}}></div>
         </div>
+
+         <h3 style={{ color: 'red', margin: '10px 0' }}>
+          Time left: {timer}s
+        </h3>
+        
+
         <p style={{fontSize:14, color:'#666'}}>Question {index+1} of {quiz.questions.length}</p>
         <h3 style={{marginTop:4}}>{question.text}</h3>
         <div>
+          
           {question.options.map((opt,i)=> (
             <div key={i} className={`option ${answers[index]===i ? 'selected':''}`} onClick={()=>selectAnswer(i)}>
+
               <label>
                 <input style={{marginRight:8}} type="radio" name={`option-${index}`} checked={answers[index]===i} onChange={()=>selectAnswer(i)} /> {opt.text}
               </label>
